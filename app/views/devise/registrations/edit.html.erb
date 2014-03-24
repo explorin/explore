@@ -1,10 +1,14 @@
 <div class="authform">
   <h3>Edit <%= resource_name.to_s.humanize %></h3>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
     <%= devise_error_messages! %>
     <div class="form-group">
+      <%= image_tag @user.avatar.url(:medium) %>
+      <%= f.file_field :avatar %>
       <%= f.label :name %>
       <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+      <%= f.label :bio %>
+      <%= f.text_area :bio, :rows => "6", :maxlength => 180, :placeholder => "About yourself in 180 characters or less.", class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :email %>
@@ -24,13 +28,13 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
     </fieldset>
-    <fieldset>
+    <!--<fieldset>
       <p>You must enter your current password to make changes.</p>
       <div class="form-group">
         <%= f.label :current_password %>
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
-    </fieldset>
+    </fieldset> -->
     <%= f.submit 'Update', :class => 'button right' %>
   <% end %>
 </div>
